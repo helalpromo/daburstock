@@ -43,7 +43,8 @@
                 </div>
                 <div>
                     <label class="block text-gray-700 text-sm font-bold mb-2">পাসওয়ার্ড (Password):</label>
-                    <input type="password" id="password" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="পাসওয়ার্ড লিখুন">
+                    <!-- পাসওয়ার্ড দৃশ্যমান করার জন্য type="text" ব্যবহার করা হয়েছে -->
+                    <input type="text" id="password" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="পাসওয়ার্ড লিখুন">
                 </div>
                 <p id="loginError" class="text-red-500 text-xs hidden font-bold text-center">ভুল ইউজারনেম অথবা পাসওয়ার্ড!</p>
                 <div>
@@ -239,9 +240,9 @@
             <div id="printableInvoice" class="p-4 bg-white">
                 <div class="text-center border-b pb-4 mb-4">
                     <h2 class="text-2xl font-bold text-blue-800">Good Mart Enterprise</h2>
-                    <p class="text-sm text-gray-600">Proprietor: Md Al Helal Khan[span_1](start_span)[span_1](end_span)</p>
-                    <p class="text-sm text-gray-600">Mobile Number: 01714692560[span_2](start_span)[span_2](end_span)</p>
-                    <p class="text-sm text-gray-600">Address: Kamarpara, Rangpur[span_3](start_span)[span_3](end_span)</p>
+                    <p class="text-sm text-gray-600">Proprietor: Md Al Helal Khan[span_0](start_span)[span_0](end_span)</p>
+                    <p class="text-sm text-gray-600">Mobile Number: 01714692560[span_1](start_span)[span_1](end_span)</p>
+                    <p class="text-sm text-gray-600">Address: Kamarpara, Rangpur[span_2](start_span)[span_2](end_span)</p>
                 </div>
 
                 <div class="mb-4 flex justify-between text-sm text-gray-700">
@@ -310,11 +311,26 @@
 
     <!-- Firebase SDK & App Logic -->
     <script type="module">
-        import { db } from "./js/firebase-config.js";
-        import { collection, getDocs, addDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-analytics.js";
+        import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
 
-        const CORRECT_USER = "dabur";
-        const CORRECT_PASS = "Helal9090";
+        const firebaseConfig = {
+            apiKey: "AIzaSyBaA0-Ji_dIE7004DvdK9Uy0qxiEhqOoUY",
+            authDomain: "dabur-stock.firebaseapp.com",
+            projectId: "dabur-stock",
+            storageBucket: "dabur-stock.firebasestorage.app",
+            messagingSenderId: "627999643598",
+            appId: "1:627999643598:web:a2fee5a22a113d6f7b3d9f",
+            measurementId: "G-ZS52JDZV2M"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getFirestore(app);
+
+        const CORRECT_USER = "admin";
+        const CORRECT_PASS = "12345";
 
         let entries = [];
         let nextInvoiceNum = 1;
